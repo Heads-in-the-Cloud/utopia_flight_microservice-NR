@@ -1,5 +1,6 @@
 package com.smoothstack.utopia.flight.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,7 @@ public class Flight {
     @Column(name = "seat_price")
     private double seatPrice;
 
+    @JsonIgnore
     public boolean isComplete() {
         return route != null && route.isComplete() && airplane != null && airplane.isComplete() && departureTime != null;
     }

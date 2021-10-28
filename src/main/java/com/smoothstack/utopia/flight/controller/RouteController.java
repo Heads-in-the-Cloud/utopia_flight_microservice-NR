@@ -1,30 +1,39 @@
 package com.smoothstack.utopia.flight.controller;
 
 import com.smoothstack.utopia.flight.entity.Route;
-import com.smoothstack.utopia.flight.repository.RouteRepository;
+import com.smoothstack.utopia.flight.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/route")
 public class RouteController {
 
     @Autowired
-    private RouteRepository routeRepository;
+    private RouteService routeService;
 
     @GetMapping(path = "/all")
     public List<Route> getRoutes() {
-        return routeRepository.findAll();
+        return routeService.getAllRoutes();
     }
 
     @GetMapping(path = "/{id}")
     public Route getRouteById(@PathVariable int id) {
-        return routeRepository.getById(id);
+        Optional<Route> route = routeService.getRouteById(id);
+        return route.orElse(null);
+    }
+
+    @PostMapping(path = "/add")
+    public Route addRoute(@RequestBody Route route) {
+        return routeService.addRoute(route);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public void deleteRoute(@PathVariable int id) {
+        routeService.deleteRouteById(id);
     }
 
 }

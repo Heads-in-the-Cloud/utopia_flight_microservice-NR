@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/flight")
+@RequestMapping(path = "/api/flights")
 public class FlightController {
 
     @Autowired
@@ -32,5 +32,19 @@ public class FlightController {
         if (f.isComplete()) {
             return ResponseEntity.ok(flightService.addFlight(flight));
         } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(flight);
+    }
+
+    @PutMapping(path = "/{id}/update")
+    public ResponseEntity<Flight> updateFlight(@PathVariable int id, @RequestBody Flight flight) {
+        Flight f = flightService.updateFlight(id, flight);
+        if (f.isComplete()) {
+            return ResponseEntity.ok(flightService.updateFlight(id, flight));
+        } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(flight);
+    }
+
+    @DeleteMapping(path="/delete/{id}")
+    public ResponseEntity<Flight> deleteFlight(@PathVariable int id) {
+        flightService.deleteFlight(id);
+        return ResponseEntity.ok(null);
     }
 }

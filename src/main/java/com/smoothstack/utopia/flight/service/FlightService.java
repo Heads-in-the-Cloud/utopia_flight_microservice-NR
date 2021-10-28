@@ -38,4 +38,18 @@ public class FlightService {
         System.out.println(flight);
         return flight;
     }
+
+    public void deleteFlight(int id) {
+        flightRepository.deleteById(id);
+    }
+
+    public Flight updateFlight(int id, Flight flight) {
+        if (flight.getRoute() != null && routeRepository.existsById(id)) {
+            flight.setRoute(routeRepository.getById(id));
+        } else return flight;
+        if (flight.getAirplane() != null && airplaneRepository.existsById(id)) {
+            flight.setAirplane(airplaneRepository.getById(flight.getAirplane().getId()));
+        } else return flight;
+        return flightRepository.save(flight);
+    }
 }
