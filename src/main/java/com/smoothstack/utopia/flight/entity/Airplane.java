@@ -1,5 +1,6 @@
 package com.smoothstack.utopia.flight.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,11 @@ public class Airplane {
     @JoinColumn(name = "type_id")
     private AirplaneType airplaneType;
 
+    public Airplane(int id) {
+        this.id = id;
+    }
+
+    @JsonIgnore
     public boolean isComplete() {
         return airplaneType != null;
     }

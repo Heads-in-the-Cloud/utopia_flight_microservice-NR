@@ -22,7 +22,11 @@ public class AirportService {
         return airportRepository.findById(id);
     }
 
-    public void deleteAirport(int id) {
+    public void deleteAirport(String iataId) {
+        airportRepository.deleteById(iataId);
+    }
 
+    public Airport addAirport(Airport airport) {
+        return airportRepository.save(airport);
     }
 }

@@ -3,13 +3,14 @@ package com.smoothstack.utopia.flight.controller;
 import com.smoothstack.utopia.flight.entity.Route;
 import com.smoothstack.utopia.flight.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/route")
+@RequestMapping(path = "api/flights/route")
 public class RouteController {
 
     @Autowired
@@ -27,8 +28,8 @@ public class RouteController {
     }
 
     @PostMapping(path = "/add")
-    public Route addRoute(@RequestBody Route route) {
-        return routeService.addRoute(route);
+    public ResponseEntity<Route> addRoute(@RequestBody Route route) {
+        return ResponseEntity.status(201).body(routeService.addRoute(route));
     }
 
     @DeleteMapping(path = "/delete/{id}")

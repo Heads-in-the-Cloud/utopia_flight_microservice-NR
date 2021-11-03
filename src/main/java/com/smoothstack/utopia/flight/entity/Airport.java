@@ -1,5 +1,6 @@
 package com.smoothstack.utopia.flight.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,11 @@ public class Airport {
     private String iataId;
     private String city;
 
+    public Airport(String iataId) {
+        this.iataId = iataId;
+    }
+
+    @JsonIgnore
     public boolean isComplete() {
         return iataId != null && city != null;
     }

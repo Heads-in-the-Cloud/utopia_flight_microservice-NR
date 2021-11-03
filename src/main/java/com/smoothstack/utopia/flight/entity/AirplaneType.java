@@ -23,4 +23,8 @@ public class AirplaneType {
     private int id;
     @Column(name = "max_capacity")
     private int maxCapacity;
+
+    public AirplaneType(int id) {
+        this.id = id;
+    }
 }

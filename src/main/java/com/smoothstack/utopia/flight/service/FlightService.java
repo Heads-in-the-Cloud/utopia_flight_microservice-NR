@@ -34,8 +34,7 @@ public class FlightService {
         if (flight.getAirplane() != null && airplaneRepository.existsById(flight.getAirplane().getId())) {
             flight.setAirplane(airplaneRepository.getById(flight.getAirplane().getId()));
         } else return flight;
-        //if(flight.isComplete()) return flightRepository.save(flight);
-        System.out.println(flight);
+        if(flight.isComplete()) return flightRepository.save(flight);
         return flight;
     }
 

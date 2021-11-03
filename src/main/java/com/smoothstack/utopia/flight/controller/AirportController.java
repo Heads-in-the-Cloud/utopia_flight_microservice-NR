@@ -3,13 +3,14 @@ package com.smoothstack.utopia.flight.controller;
 import com.smoothstack.utopia.flight.entity.Airport;
 import com.smoothstack.utopia.flight.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/airport")
+@RequestMapping("api/flights/airport")
 public class AirportController {
     @Autowired
     private AirportService airportService;
@@ -25,8 +26,13 @@ public class AirportController {
         return airport.orElse(null);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteAirport(@PathVariable int id) {
-        airportService.deleteAirport(id);
+    @PostMapping(path = "/add")
+    public ResponseEntity<Airport> addAirport(@RequestBody Airport airport) {
+        return ResponseEntity.status(201).body(airportService.addAirport(airport));
+    }
+
+    @DeleteMapping(path = "/{iataId}")
+    public void deleteAirport(@PathVariable String iataId) {
+        airportService.deleteAirport(iataId);
     }
 }

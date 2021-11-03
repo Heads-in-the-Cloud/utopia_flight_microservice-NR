@@ -22,13 +22,13 @@ public class AirplaneController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Airplane> getAirplaneById(int id) {
+    public ResponseEntity<Airplane> getAirplaneById(@PathVariable int id) {
         Optional<Airplane> a = airplaneService.getAirplane(id);
         return a.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Airplane> addAirPlane(@RequestBody Airplane airplane) {
+    public ResponseEntity<Airplane> addAirplane(@RequestBody Airplane airplane) {
         Airplane a = airplaneService.addAirplane(airplane);
         return ResponseEntity.ok(a);
     }
