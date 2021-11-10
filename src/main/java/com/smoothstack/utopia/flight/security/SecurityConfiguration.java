@@ -11,9 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -25,10 +22,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        //http.authorizeRequests().antMatchers(GET, "/api/flights/**").hasAnyAuthority("ROLE_TRAVELER", "ROLE_EMPLOYEE", "ROLE_ADMIN");
-        //http.authorizeRequests().antMatchers(POST, "/api/flights/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new JwtAuthenticationVerificationFilter(authenticationManagerBean()));
     }

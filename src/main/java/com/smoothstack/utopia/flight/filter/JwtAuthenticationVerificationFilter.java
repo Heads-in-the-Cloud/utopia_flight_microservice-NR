@@ -54,23 +54,19 @@ public class JwtAuthenticationVerificationFilter extends BasicAuthenticationFilt
         if (token == null) {
             return null;
         }
-
-        DecodedJWT jwt = JWT.require(Algorithm.HMAC256("secret"))
+        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        DecodedJWT jwt = JWT.require(algorithm)
                 .build()
                 .verify(token.replace("Bearer ", ""));
-
         String subject = jwt.getSubject();
-
         if (subject == null) {
             return null;
         }
-
         List<SimpleGrantedAuthority> authorities = jwt.getClaim("roles")
                 .asList(String.class)
                 .stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-
         return new UsernamePasswordAuthenticationToken(subject, null, authorities);
     }
 }
