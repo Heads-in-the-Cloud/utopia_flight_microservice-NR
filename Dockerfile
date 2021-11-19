@@ -1,5 +1,5 @@
 FROM openjdk:8-jre-slim
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
-EXPOSE 8081
+EXPOSE ${UTOPIA_MICROSERVICE_FLIGHTS_PORT}
 ENTRYPOINT ["java", "-jar", "app.jar"]
