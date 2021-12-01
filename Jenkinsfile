@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        UTOPIA_MICROSERVICE_USERS_PORT=credentials('flights_port')
+        UTOPIA_MICROSERVICE_FLIGHTS_PORT=credentials('flights_port')
         UTOPIA_DB_PORT=credentials('db_port')
         UTOPIA_DB_HOST=credentials('db_host')
         UTOPIA_DB_NAME=credentials('db_name')
