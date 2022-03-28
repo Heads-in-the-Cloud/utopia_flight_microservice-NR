@@ -54,9 +54,9 @@ pipeline {
                 withSonarQubeEnv('SonarQube') {
                     sh """
                        ${SONARQUBE_ID}/bin/sonar-scanner \
-                       -Dsonar.projectKey=nr-utopia-auth \
-                       -Dsonar.sources=./src/main/java/com/smoothstack/utopia/auth \
-                       -Dsonar.java.binaries=./target/classes/com/smoothstack/utopia/auth
+                       -Dsonar.projectKey=nr-utopia-flight \
+                       -Dsonar.sources=./src/main/java/com/smoothstack/utopia/flight \
+                       -Dsonar.java.binaries=./target/classes/com/smoothstack/utopia/flight
                     """
                 }
                 timeout(time: 5, unit: 'MINUTES') {
